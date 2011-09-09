@@ -341,15 +341,12 @@
 							<!-- jmeterDefaultPropertiesFile>
 								${project.build.directory}/jmeter.properties
 							</jmeterDefaultPropertiesFile -->
-							<jmeterHomeDirectory>
-								/home/matthias/Entwicklung/Tools/jakarta-jmeter-2.4
-							</jmeterHomeDirectory>
 							<jmeterCustomPropertiesFile>
 								${project.build.directory}/testplan.properties
 							</jmeterCustomPropertiesFile>
-							<jmeterJavaProperties>
+							<!--jmeterJavaProperties>
 		   						<java.property>user.dir=/home/matthias/Entwicklung/Tools/jakarta-jmeter-2.4</java.property>
-							</jmeterJavaProperties>
+							</jmeterJavaProperties -->
 						</configuration>
 					</execution>
 				</executions>
