@@ -11,13 +11,15 @@ Pre-requisits:
 
 4.) make your changes in the pom file to specific escidoc settings - if needed
 
-5.) testplan.porperties picks up settings done in  the pom file, like path and login data. You don't have to change anything in here anymore. Ecspet the number of threads, rampup etc.
+5.) testplan.porperties picks up settings done in  the pom file, like path and login data. You don't have to change anything in here anymore. Except the number of threads, rampup etc.
 
 6.) the test itself create the examples of escidoc. rampup time is set to 60 sec for this action. 
 
 7.) there will be an exception thrown claiming that the junit dir is not available. This is due to Jmeter classpath is wrong, and I couldn't figure out how to avoid this. I may ignore the exception. 
 
-8.) loading the examples gives also exceptions, but objects gets created. 
+8.) loading the examples gives also exceptions, but objects gets created.
+
+9. the objects.csv file is located in target/jmeter-reports along with other resuls files. 
 
 More to come
 
