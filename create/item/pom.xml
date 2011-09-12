@@ -261,6 +261,20 @@
 							</outputFile>
 						</configuration>
 					</execution>
+
+					<execution>
+						<id>remove deny-unallowed-file-resolution</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>rm</executable>
+							<arguments>
+								<argument>${project.build.directory}/escidoc/fedora/server/fedora-internal-use/fedora-internal-use-repository-policies-approximating-2.0/deny-unallowed-file-resolution.xml</argument>
+							</arguments>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 
