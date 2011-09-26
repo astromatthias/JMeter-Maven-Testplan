@@ -31,7 +31,7 @@
           </elementProp>
           <elementProp name="RAMPUP" elementType="Argument">
             <stringProp name="Argument.name">RAMPUP</stringProp>
-            <stringProp name="Argument.value">${__property(rampup,3)}</stringProp>
+            <stringProp name="Argument.value">${__property(rampup,20)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="REPEAT" elementType="Argument">
@@ -66,7 +66,7 @@
           </elementProp>
           <elementProp name="TESTDATEN" elementType="Argument">
             <stringProp name="Argument.name">TESTDATEN</stringProp>
-            <stringProp name="Argument.value">${__property(testdaten,testdaten.csv)}</stringProp>
+            <stringProp name="Argument.value">${__property(testdaten,testdaten.xml)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="LOGINPATH" elementType="Argument">
@@ -365,7 +365,7 @@ props.put(&quot;cookiedata2&quot;,vars.get(&quot;COOKIE_JSESSIONID&quot;));
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
           <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
             <collectionProp name="HTTPFileArgs.files">
               <elementProp name="${TESTDATEN}" elementType="HTTPFileArg">
