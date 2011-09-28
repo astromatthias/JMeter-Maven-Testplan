@@ -381,7 +381,7 @@ props.put(&quot;cookiedata2&quot;,vars.get(&quot;COOKIE_JSESSIONID&quot;));
         <hashTree>
           <JSR223Listener guiclass="TestBeanGUI" testclass="JSR223Listener" testname="JSR223 Listener" enabled="true">
             <stringProp name="scriptLanguage">beanshell</stringProp>
-            <stringProp name="parameters">${RESULTDIR}</stringProp>
+            <stringProp name="parameters">${RESULTDIR} </stringProp>
             <stringProp name="filename">${SCRIPTDIR}</stringProp>
             <stringProp name="script"></stringProp>
           </JSR223Listener>
@@ -417,7 +417,7 @@ props.put(&quot;cookiedata2&quot;,vars.get(&quot;COOKIE_JSESSIONID&quot;));
               <threadCounts>true</threadCounts>
             </value>
           </objProp>
-          <stringProp name="filename">${REPORTDIR}</stringProp>
+          <stringProp name="filename">target/jmeter-reports/JMETER_${__time(YMDHMS)}_${REPORTDIR}</stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>
