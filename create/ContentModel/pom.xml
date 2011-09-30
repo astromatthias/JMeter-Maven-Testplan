@@ -55,6 +55,37 @@
 
 	</properties>
 
+	<profiles>
+	    <profile>
+	      <id>skip_escidoc_install</id>
+	      <activation>
+		<property>
+		  <name>env</name>
+		  <value>skip</value>
+		</property>
+	      </activation>
+	      <properties>
+		<skipITs>true</skipITs>
+		<skipServer>false</skipServer>
+	      </properties>
+	    </profile>
+
+	   <profile>
+	      <id>run_escidoc_install</id>
+	      <activation>
+		<property>
+		  <name>env</name>
+		  <value>install</value>
+		</property>
+	      </activation>
+	      <properties>
+		<skipITs>false</skipITs>
+		<skipServer>false</skipServer>
+	      </properties>
+	    </profile>	
+        </profiles>
+
+
        
 	<dependencies>
 		
@@ -197,10 +228,27 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.directory}</outputDirectory>
+							<outputDirectory>${env.TEST_HOME}</outputDirectory>
 							<resources>
 								<resource>
 									<directory>src/test/filtered-resources</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>copy-filtered-jmeter-test-config</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/test/jmeter-filtered-resources</directory>
 									<filtering>true</filtering>
 								</resource>
 							</resources>
@@ -227,7 +275,7 @@
 									<version>${escidoc.core.version}</version>
 									<classifier>standard</classifier>
 									<overWrite>false</overWrite>
-									<outputDirectory>${project.build.directory}</outputDirectory>
+									<outputDirectory>${env.TEST_HOME}</outputDirectory>
 									<destFileName>escidoc-installer.jar</destFileName>
 								</artifactItem>
 							</artifactItems>
@@ -254,11 +302,25 @@
 							<arguments>
 								<argument>-Dskip.validation=true</argument>
 								<argument>-jar</argument>
-								<argument>${project.build.directory}/escidoc-installer.jar</argument>
-								<argument>${project.build.directory}/${escidoc.installer.config}</argument>
+								<argument>${env.TEST_HOME}/escidoc-installer.jar</argument>
+								<argument>${env.TEST_HOME}/${escidoc.installer.config}</argument>
 							</arguments>
-							<outputFile>${project.build.directory}/escidoc-installer.log
+							<outputFile>${env.TEST_HOME}/escidoc-installer.log
 							</outputFile>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>remove deny-unallowed-file-resolution</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>rm</executable>
+							<arguments>
+								<argument>${env.TEST_HOME}/escidoc/fedora/server/fedora-internal-use/fedora-internal-use-repository-policies-approximating-2.0/deny-unallowed-file-resolution.xml</argument>
+							</arguments>
 						</configuration>
 					</execution>
 				</executions>
@@ -288,14 +350,14 @@
 					</execution>
 				</executions>
 				<configuration>
-					<skip>${skipITs}</skip>
+					<skip>${skipServer}</skip>
 					<wait>${cargo.wait}</wait>
 					<container>
 						<containerId>jboss42x</containerId>
-						<home>${project.build.directory}/escidoc/jboss</home>
+						<home>${env.TEST_HOME}/escidoc/jboss</home>
 						<timeout>600000</timeout>
 						<systemProperties>
-							<ESCIDOC_HOME>${project.build.directory}/escidoc/core</ESCIDOC_HOME>
+							<ESCIDOC_HOME>${env.TEST_HOME}/escidoc/core</ESCIDOC_HOME>
 						</systemProperties>
 					</container>
 					<configuration>
@@ -328,11 +390,25 @@
 						</goals>
 						<configuration>
 							<reportDir>${project.build.directory}/jmeter-reports</reportDir>
+							<!-- jmeterUserProperties -->								
+								<!-- die folgenden properties sind globale Maven properties in diesem File -->	
+								<!-- hostname>${escidoc.server.host}</hostname>
+								<port>${escidoc.server.port}</port -->
+
+								<!-- contains testplan.properties -->
+								<!-- host>${escidoc.server.host}</host>
+								<port>${escidoc.server.port}</port -->
+							<!-- /jmeterUserProperties -->
 							
+							<!-- jmeterDefaultPropertiesFile>
+								${project.build.directory}/jmeter.properties
+							</jmeterDefaultPropertiesFile -->
 							<jmeterCustomPropertiesFile>
 								${project.build.directory}/testplan.properties
 							</jmeterCustomPropertiesFile>
-							
+							<!--jmeterJavaProperties>
+		   						<java.property>user.dir=/home/matthias/Entwicklung/Tools/jakarta-jmeter-2.4</java.property>
+							</jmeterJavaProperties -->
 						</configuration>
 					</execution>
 				</executions>

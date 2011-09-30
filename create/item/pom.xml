@@ -61,7 +61,7 @@
 	      <activation>
 		<property>
 		  <name>env</name>
-		  <value>dev</value>
+		  <value>skip</value>
 		</property>
 	      </activation>
 	      <properties>
@@ -75,7 +75,7 @@
 	      <activation>
 		<property>
 		  <name>env</name>
-		  <value>dev</value>
+		  <value>install</value>
 		</property>
 	      </activation>
 	      <properties>
